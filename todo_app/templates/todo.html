@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Todo List
+{% endblock %}
+
+{% block content %}
+
+<h1>Welcome, {{ user_name }} to the Todo App</h1>
+
+
+<div class="todo-form">
+
+    <input
+        type="text"
+        id="todoInput"
+        placeholder="Enter a task"
+    >
+
+    <select id="priorityInput">
+
+        <option value="low">
+            Low
+        </option>
+
+        <option value="medium" selected>
+            Medium
+        </option>
+
+        <option value="high">
+            High
+        </option>
+
+    </select>
+
+    <button id="addTodoBtn">
+        Add Todo
+    </button>
+
+</div>
+
+
+<ul id="todoList">
+
+    {% for todo in todos %}
+
+        <li class="todo-item">
+
+            <span class="todo-text">
+                {{ forloop.counter }}. {{ todo.title }}
+            </span>
+
+            <span class="priority-label">
+                Medium
+            </span>
+
+            <div class="todo-actions">
+
+                <button class="complete-btn">
+                    ✓
+                </button>
+
+                <button class="delete-btn">
+                    Delete
+                </button>
+
+            </div>
+
+        </li>
+
+    {% empty %}
+
+        <li>
+            No todos available.
+        </li>
+
+    {% endfor %}
+
+</ul>
+
+<div class="task-count">
+    Total tasks:
+    <span id="taskCount">{{ todos|length }}</span>
+</div>
+
+{% endblock %}
